@@ -262,7 +262,7 @@ Admin: manage (users and collection), view, create, delete, update (user info)
 
 | Responsibilities                                                                                     | Collaborators |
 |------------------------------------------------------------------------------------------------------|--------------|
-| Contains list of supported platforms<br>Store app title (from Media)<br>Version, Publisher, FileSize<br>Allow download, rate, and execute actions | Media        |
+| Store data (supported platforms, app title (from Media), Version, Publisher, FileSize)<br>Allow download, rate, and execute actions | Media        |
 
 ### EBook
 
@@ -319,6 +319,4 @@ Admin: manage (users and collection), view, create, delete, update (user info)
 | Inherit user attributes and behavior<br>Interact with media collection<br>List, preview, borrow, rate (if borrowed), perform media-specific actions | Media        |
 
 
-Employee: add, remove (media items)
 
-Admin: manage (users and collection), view, create, delete, update (user info)
