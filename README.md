@@ -58,6 +58,7 @@ classDiagram
         +Download(url: string) void
         +View() void
         +Read() void
+        +Rate(rating: int) void 
     }
     
     class Movie {
@@ -82,6 +83,7 @@ classDiagram
         +Song(title, composer, singer, genre, fileType, duration, language)
         +Download(url: string) void
         +Play() void
+        +Rate(rating: int) void
     }
     
     class VideoGame {
@@ -93,6 +95,7 @@ classDiagram
         +Download(url: string) void
         +Play() void
         +Complete() void
+        +Rate(rating: int) void
     }
     
     class App {
@@ -103,6 +106,7 @@ classDiagram
         +App(title, version, publisher, supportedPlatforms, fileSize)
         +Download(url: string) void
         +Execute() void
+        +Rate(rating: int) void
     }
     
     class Podcast {
@@ -115,6 +119,7 @@ classDiagram
         +Download(url: string) void
         +Listen() void
         +Complete() void
+        +Rate(rating: int) void
     }
     
     class Image {
@@ -125,6 +130,7 @@ classDiagram
         +Image(title, resolution, fileFormat, fileSize, dateTaken)
         +Download(url: string) void
         +Display() void
+        +Rate(rating: int) void
     }
     
     %% Inheritance Relationships
