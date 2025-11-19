@@ -1,4 +1,7 @@
 interface IPlayable
 {
-    void Play();
+    void Play()
+    {
+        Console.WriteLine("Playing...");
+    }
 }
