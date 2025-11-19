@@ -1,6 +1,8 @@
+using oop_workshop.src.Domain.Interfaces;
+
 namespace oop_workshop.src.Domain.Media
 {
-    class Podcast : Media
+    class Podcast : Media, IDownloadable, IRatable
     {
         public int ReleaseYear { get; private set; }
         public string[] Hosts { get; private set; }
@@ -16,6 +18,26 @@ namespace oop_workshop.src.Domain.Media
             Guests = guests;
             EpisodeNumber = episodeNumber;
             Language = language;
+        }
+
+        public void Download(string url)
+        {
+            Console.WriteLine($"Downloading podcast episode '{title}' from {url}...");
+        }
+
+        public void Rate(int rating)
+        {
+            Console.WriteLine($"Rated podcast episode '{title}' with {rating} stars.");
+        }
+
+        public void Listen()
+        {
+            Console.WriteLine($"Listening to podcast episode '{title}'.");
+        }
+
+        public void Complete()
+        {
+            Console.WriteLine($"Completed podcast episode '{title}'.");
         }
     }
 }

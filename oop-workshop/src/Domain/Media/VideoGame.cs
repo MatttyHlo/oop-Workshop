@@ -1,6 +1,8 @@
+using oop_workshop.src.Domain.Interfaces;
+
 namespace oop_workshop.src.Domain.Media
 {
-    class VideoGame : Media
+    class VideoGame : Media, IDownloadable, IPlayable, IRatable
     {
         public string Genre { get; private set; }
         public string Publisher { get; private set; }
@@ -14,6 +16,26 @@ namespace oop_workshop.src.Domain.Media
             Publisher = publisher;
             ReleaseYear = releaseYear;
             SupportedPlatforms = supportedPlatforms;
+        }
+
+        public void Download(string url)
+        {
+            Console.WriteLine($"Downloading video game '{title}' from {url}...");
+        }
+
+        public void Rate(int rating)
+        {
+            Console.WriteLine($"Rated video game '{title}' with {rating} stars.");
+        }
+
+        public void Play()
+        {
+            Console.WriteLine($"Playing video game '{title}'.");
+        }
+
+        public void Complete()
+        {
+            Console.WriteLine($"Completed video game '{title}'.");
         }
     }
 }
