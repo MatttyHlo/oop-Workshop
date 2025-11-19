@@ -170,3 +170,30 @@ classDiagram
     IDownloadable <|.. Image
     IRatable <|.. Image
 ```
+# Verb-noun analysis
+
+## Media:
+
+E-books: view, download, read (title, author, language, pages, year, ISBN)
+
+Movies: watch, download (title, director, genres, release year, language, duration)
+
+Songs: play, download (title, composer, singer, genre, file type, duration, language)
+
+Video-games: download, play, complete (title, genre, publisher, release year, platforms)
+
+Apps: download, execute (title, version, publisher, platforms, file size)
+
+Podcasts: download, listen, complete (title, release year, host, guest, episode number, language)
+
+Images: download, display (title, resolution, file format, file size, date taken)
+
+All media: borrow, rate
+
+## Roles:
+
+Borrower: list, select, preview, rate, borrow, perform (actions specific to media)
+
+Employee: add, remove (media items)
+
+Admin: manage (users and collection), view, create, delete, update (user info)
