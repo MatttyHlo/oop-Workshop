@@ -56,7 +56,6 @@ classDiagram
         +ISBN: string
         +EBook(title, author, language, numberOfPages, yearOfPublication, isbn)
         +Download(url: string) void
-        +Rate(rating: int) void
         +View() void
         +Read() void
     }
@@ -82,7 +81,6 @@ classDiagram
         +Language: string
         +Song(title, composer, singer, genre, fileType, duration, language)
         +Download(url: string) void
-        +Rate(rating: int) void
         +Play() void
     }
     
@@ -93,7 +91,6 @@ classDiagram
         +SupportedPlatforms: string[]
         +VideoGame(title, genre, publisher, releaseYear, supportedPlatforms)
         +Download(url: string) void
-        +Rate(rating: int) void
         +Play() void
         +Complete() void
     }
@@ -105,7 +102,6 @@ classDiagram
         +FileSize: double
         +App(title, version, publisher, supportedPlatforms, fileSize)
         +Download(url: string) void
-        +Rate(rating: int) void
         +Execute() void
     }
     
@@ -117,7 +113,6 @@ classDiagram
         +Language: string
         +Podcast(title, releaseYear, hosts, guests, episodeNumber, language)
         +Download(url: string) void
-        +Rate(rating: int) void
         +Listen() void
         +Complete() void
     }
@@ -129,7 +124,6 @@ classDiagram
         +DateTaken: DateTime
         +Image(title, resolution, fileFormat, fileSize, dateTaken)
         +Download(url: string) void
-        +Rate(rating: int) void
         +Display() void
     }
     
