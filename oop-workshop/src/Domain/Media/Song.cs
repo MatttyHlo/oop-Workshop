@@ -2,7 +2,7 @@ using oop_workshop.src.Domain.Interfaces;
 
 namespace oop_workshop.src.Domain.Media
 {
-    class Song : Media, IDownloadable, IPlayable, IRatable
+    class Song : Media, IDownloadable, IRatable
     {
         public string Composer { get; private set; }
         public string Singer { get; private set; }
@@ -12,8 +12,8 @@ namespace oop_workshop.src.Domain.Media
         public string Language { get; private set; }
 
         public Song(string title, string composer, string singer, string genre, string fileType, int duration, string language)
+            : base(title)
         {
-            this.title = title;
             Composer = composer;
             Singer = singer;
             Genre = genre;
@@ -35,6 +35,16 @@ namespace oop_workshop.src.Domain.Media
         public void Play()
         {
             Console.WriteLine($"Playing song '{title}'.");
+        }
+
+        public void Pause()
+        {
+            Console.WriteLine($"Paused song '{title}'.");
+        }
+
+        public void Stop()
+        {
+            Console.WriteLine($"Stopped song '{title}'.");
         }
     }
 }

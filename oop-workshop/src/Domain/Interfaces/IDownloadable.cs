@@ -1,7 +1,7 @@
-interface IDownloadable
+namespace oop_workshop.src.Domain.Interfaces
 {
-    void Download(string url)
+    public interface IDownloadable
     {
-        Console.WriteLine($"Downloading from {url}...");
+        void Download(string url);
     }
 }

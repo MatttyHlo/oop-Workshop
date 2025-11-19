@@ -11,8 +11,8 @@ namespace oop_workshop.src.Domain.Media
         public int Duration { get; private set; }
 
         public Movie(string title, string director, string[] genres, int releaseYear, string language, int duration)
+            : base(title)
         {
-            this.title = title;
             Director = director;
             Genres = genres;
             ReleaseYear = releaseYear;

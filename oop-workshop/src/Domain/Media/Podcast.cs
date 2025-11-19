@@ -11,8 +11,8 @@ namespace oop_workshop.src.Domain.Media
         public string Language { get; private set; }
 
         public Podcast(string title, int releaseYear, string[] hosts, string[] guests, int episodeNumber, string language)
+            : base(title)
         {
-            this.title = title;
             ReleaseYear = releaseYear;
             Hosts = hosts;
             Guests = guests;

@@ -11,8 +11,8 @@ namespace oop_workshop.src.Domain.Media
         public string ISBN { get; private set; }
 
         public EBook(string title, string author, string language, int numberOfPages, int yearOfPublication, string isbn)
+            : base(title)
         {
-            this.title = title;
             Author = author;
             Language = language;
             NumberOfPages = numberOfPages;

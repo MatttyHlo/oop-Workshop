@@ -10,8 +10,8 @@ namespace oop_workshop.src.Domain.Media
         public DateTime DateTaken { get; private set; }
 
         public Image(string title, string resolution, string fileFormat, double fileSize, DateTime dateTaken)
+            : base(title)
         {
-            this.title = title;
             Resolution = resolution;
             FileFormat = fileFormat;
             FileSize = fileSize;

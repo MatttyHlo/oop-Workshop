@@ -10,8 +10,8 @@ namespace oop_workshop.src.Domain.Media
         public double FileSize { get; private set; }
 
         public App(string title, string version, string publisher, string[] supportedPlatforms, double fileSize)
+            : base(title)
         {
-            this.title = title;
             Version = version;
             Publisher = publisher;
             SupportedPlatforms = supportedPlatforms;

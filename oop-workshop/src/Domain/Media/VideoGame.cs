@@ -2,7 +2,7 @@ using oop_workshop.src.Domain.Interfaces;
 
 namespace oop_workshop.src.Domain.Media
 {
-    class VideoGame : Media, IDownloadable, IPlayable, IRatable
+    class VideoGame : Media, IDownloadable, IRatable
     {
         public string Genre { get; private set; }
         public string Publisher { get; private set; }
@@ -10,8 +10,8 @@ namespace oop_workshop.src.Domain.Media
         public string[] SupportedPlatforms { get; private set; }
 
         public VideoGame(string title, string genre, string publisher, int releaseYear, string[] supportedPlatforms)
+            : base(title)
         {
-            this.title = title;
             Genre = genre;
             Publisher = publisher;
             ReleaseYear = releaseYear;
@@ -31,6 +31,16 @@ namespace oop_workshop.src.Domain.Media
         public void Play()
         {
             Console.WriteLine($"Playing video game '{title}'.");
+        }
+
+        public void Pause()
+        {
+            Console.WriteLine($"Paused video game '{title}'.");
+        }
+
+        public void Stop()
+        {
+            Console.WriteLine($"Stopped video game '{title}'.");
         }
 
         public void Complete()

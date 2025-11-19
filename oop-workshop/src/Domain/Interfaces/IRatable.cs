@@ -1,7 +1,7 @@
-interface IRatable
+namespace oop_workshop.src.Domain.Interfaces
 {
-    void Rate(int rating)
+    public interface IRatable
     {
-        Console.WriteLine($"Rated with {rating} stars.");
+        void Rate(int rating);
     }
 }

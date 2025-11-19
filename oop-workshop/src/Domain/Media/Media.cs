@@ -1,4 +1,12 @@
-class Media
+namespace oop_workshop.src.Domain.Media
 {
-    public string title {public get ;private set;}
+    public class Media
+    {
+        public string title { get; private set; }
+        
+        public Media(string title)
+        {
+            this.title = title;
+        }
+    }
 }
