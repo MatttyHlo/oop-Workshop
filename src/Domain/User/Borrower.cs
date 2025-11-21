@@ -1,9 +1,7 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-
-namespace oop_workshop.src.Domain.Media
+namespace oop_workshop.src.Domain.User
 {
+    using oop_workshop.src.Domain.Media;
+    
     public class Borrower : User
     {
         public List<Media> borrowed_media {get; private set;}
@@ -105,12 +103,6 @@ namespace oop_workshop.src.Domain.Media
             }
         }
 
-        /// <summary>
-        /// Organizes and displays a list of media items based on string criteria
-        /// Uses reflection to automatically detect property types and apply appropriate comparers
-        /// Supported criteria: title, rating, director, author, composer, singer, duration, 
-        /// ReleaseYear, YearOfPublication, etc. - any public property on Media or derived types
-        /// </summary>
         public void Organize(List<Media> items, string criteria)
         {
             if (items == null || items.Count == 0)
@@ -128,39 +120,68 @@ namespace oop_workshop.src.Domain.Media
             IComparer<Media>? comparer = null;
             string sortDescription = criteria;
             string criteriaLower = criteria.ToLower().Trim();
+            string propertyToCheck = criteria;
 
-            // Special handling for rating (nullable double, highest first)
             if (criteriaLower == "rating")
             {
                 comparer = new RatingComparer();
                 sortDescription = "Rating (Highest First)";
+                propertyToCheck = "rating";
             }
-            // For year-based sorting, use descending order (most recent first)
             else if (criteriaLower == "year" || criteriaLower == "releaseyear" || criteriaLower == "yearofpublication")
             {
-                // Try ReleaseYear first, then YearOfPublication
                 comparer = new GenericMediaComparer("ReleaseYear", descending: true);
                 sortDescription = "Year (Most Recent First)";
+                propertyToCheck = "ReleaseYear";
             }
-            // For all other criteria, use ascending order with automatic type detection
             else
             {
                 comparer = new GenericMediaComparer(criteria, descending: false);
                 sortDescription = $"{criteria} (A-Z / Ascending)";
+                propertyToCheck = criteria;
             }
 
             try
             {
-                List<Media> sortedList = new List<Media>(items);
-                sortedList.Sort(comparer);
+                List<Media> filteredList = new List<Media>();
+                
+                if (propertyToCheck.ToLower() == "rating")
+                {
+                    foreach (Media item in items)
+                    {
+                        if (item.rating.HasValue)
+                        {
+                            filteredList.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Media item in items)
+                    {
+                        var propertyValue = GetPropertyValue(item, propertyToCheck);
+                        if (propertyValue != null)
+                        {
+                            filteredList.Add(item);
+                        }
+                    }
+                }
+
+                if (filteredList.Count == 0)
+                {
+                    Console.WriteLine($"\nNo items found with property '{propertyToCheck}'.");
+                    return;
+                }
+
+                filteredList.Sort(comparer);
 
                 Console.WriteLine($"\n--- Media List Organized by {sortDescription} ---");
-                foreach (Media item in sortedList)
+                foreach (Media item in filteredList)
                 {
                     string ratingStr = item.rating.HasValue ? $"{item.rating.Value:F1}" : "N/A";
                     Console.WriteLine($"[{item.GetType().Name}] {item.title} (Rating: {ratingStr})");
                 }
-                Console.WriteLine($"--- Total: {sortedList.Count} items ---\n");
+                Console.WriteLine($"--- Total: {filteredList.Count} items ---\n");
             }
             catch (Exception e)
             {
@@ -168,9 +189,17 @@ namespace oop_workshop.src.Domain.Media
             }
         }
 
-        /// <summary>
-        /// Organizes borrowed media based on string criteria
-        /// </summary>
+        private object? GetPropertyValue(Media media, string propertyName)
+        {
+            Type type = media.GetType();
+            var property = type.GetProperty(propertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase);
+            
+            if (property != null)
+            {
+                return property.GetValue(media);
+            }
+
+            return null;
+        }
     }
-    
 }
