@@ -1,6 +1,7 @@
 using oop_workshop.src.Domain.Media;
 using oop_workshop.src.Domain.Interfaces;
 using oop_workshop.src.Domain.Users;
+using oop_workshop.src.Data;
 
 namespace oop_workshop.src.Presentation
 {
@@ -11,30 +12,67 @@ namespace oop_workshop.src.Presentation
 
         public static void Initialize()
         {
-            // Initialize sample media
-            mediaCollection.Add(new Movie("The Matrix", "Wachowski Brothers", new string[] { "Action", "Sci-Fi" }, 1999, "English", 136));
-            mediaCollection.Add(new Movie("Inception", "Christopher Nolan", new string[] { "Action", "Thriller" }, 2010, "English", 148));
-            mediaCollection.Add(new Movie("Interstellar", "Christopher Nolan", new string[] { "Sci-Fi", "Drama" }, 2014, "English", 169));
-            
-            mediaCollection.Add(new Song("Bohemian Rhapsody", "Freddie Mercury", "Queen", "Rock", "MP3", 354, "English"));
-            mediaCollection.Add(new Song("Imagine", "John Lennon", "John Lennon", "Pop", "FLAC", 183, "English"));
-            
-            mediaCollection.Add(new EBook("1984", "George Orwell", "English", 328, 1949, "978-0451524935"));
-            mediaCollection.Add(new EBook("Clean Code", "Robert C. Martin", "English", 464, 2008, "978-0132350884"));
-            
-            mediaCollection.Add(new Podcast("Tech Talk Daily", 2023, new string[] { "John Doe", "Jane Smith" }, new string[] { "Elon Musk" }, 42, "English"));
-            
-            mediaCollection.Add(new VideoGame("The Witcher 3", "RPG", "CD Projekt Red", 2015, new string[] { "PC", "PlayStation", "Xbox" }));
-            
-            mediaCollection.Add(new App("Spotify", "8.8.0", "Spotify AB", new string[] { "iOS", "Android", "Windows" }, 95.5));
-            
-            mediaCollection.Add(new Image("Sunset Beach", "4K", "JPG", 8.5, new DateTime(2023, 6, 15)));
+            Console.WriteLine("=== INITIALIZING LIBRARY SYSTEM ===\n");
 
-            // Initialize sample users
-            userList.Add(new Borrower("Alice Johnson", 25, 123456789));
-            userList.Add(new Borrower("Bob Smith", 30, 987654321));
-            userList.Add(new Employee("Charlie Brown", 35, 111222333));
-            userList.Add(new Admin("Diana Prince", 40, 444555666));
+            // Try to load existing data
+            var loadedMedia = DataManager.LoadMedia();
+            var loadedUsers = DataManager.LoadUsers();
+
+            // If data exists, use it
+            if (loadedMedia.Count > 0 || loadedUsers.Count > 0)
+            {
+                mediaCollection = loadedMedia;
+                userList = loadedUsers;
+                DataManager.LoadBorrowedMedia(userList, mediaCollection);
+                Console.WriteLine("\n[SUCCESS] Data loaded from files.");
+            }
+            else
+            {
+                // Otherwise, initialize with sample data
+                Console.WriteLine("[INFO] No existing data found. Loading sample data...\n");
+                
+                // Initialize sample media
+                mediaCollection.Add(new Movie("The Matrix", "Wachowski Brothers", new string[] { "Action", "Sci-Fi" }, 1999, "English", 136));
+                mediaCollection.Add(new Movie("Inception", "Christopher Nolan", new string[] { "Action", "Thriller" }, 2010, "English", 148));
+                mediaCollection.Add(new Movie("Interstellar", "Christopher Nolan", new string[] { "Sci-Fi", "Drama" }, 2014, "English", 169));
+                
+                mediaCollection.Add(new Song("Bohemian Rhapsody", "Freddie Mercury", "Queen", "Rock", "MP3", 354, "English"));
+                mediaCollection.Add(new Song("Imagine", "John Lennon", "John Lennon", "Pop", "FLAC", 183, "English"));
+                
+                mediaCollection.Add(new EBook("1984", "George Orwell", "English", 328, 1949, "978-0451524935"));
+                mediaCollection.Add(new EBook("Clean Code", "Robert C. Martin", "English", 464, 2008, "978-0132350884"));
+                
+                mediaCollection.Add(new Podcast("Tech Talk Daily", 2023, new string[] { "John Doe", "Jane Smith" }, new string[] { "Elon Musk" }, 42, "English"));
+                
+                mediaCollection.Add(new VideoGame("The Witcher 3", "RPG", "CD Projekt Red", 2015, new string[] { "PC", "PlayStation", "Xbox" }));
+                
+                mediaCollection.Add(new App("Spotify", "8.8.0", "Spotify AB", new string[] { "iOS", "Android", "Windows" }, 95.5));
+                
+                mediaCollection.Add(new Image("Sunset Beach", "4K", "JPG", 8.5, new DateTime(2023, 6, 15)));
+
+                // Initialize sample users
+                userList.Add(new Borrower("Alice Johnson", 25, 123456789));
+                userList.Add(new Borrower("Bob Smith", 30, 987654321));
+                userList.Add(new Employee("Charlie Brown", 35, 111222333));
+                userList.Add(new Admin("Diana Prince", 40, 444555666));
+
+                // Save initial data
+                SaveAllData();
+                Console.WriteLine("[SUCCESS] Sample data initialized and saved.\n");
+            }
+
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Saves all data to files
+        /// </summary>
+        public static void SaveAllData()
+        {
+            DataManager.SaveMedia(mediaCollection);
+            DataManager.SaveUsers(userList);
+            DataManager.SaveBorrowedMedia(userList, mediaCollection);
         }
 
         public static void Start()
@@ -329,6 +367,7 @@ namespace oop_workshop.src.Presentation
             if (int.TryParse(Console.ReadLine(), out int rating))
             {
                 borrower.Rate(media, rating);
+                SaveAllData();
             }
             else
             {
@@ -347,6 +386,7 @@ namespace oop_workshop.src.Presentation
 
             Console.WriteLine();
             borrower.Borrow(title, mediaCollection);
+            SaveAllData();
             PauseScreen();
         }
 
@@ -644,6 +684,7 @@ namespace oop_workshop.src.Presentation
                 Console.WriteLine($"\nError adding media: {ex.Message}");
             }
 
+            SaveAllData();
             PauseScreen();
         }
 
@@ -660,6 +701,7 @@ namespace oop_workshop.src.Presentation
             {
                 employee.RemoveMedia(mediaCollection, media);
                 Console.WriteLine($"\n'{title}' removed successfully!");
+                SaveAllData();
             }
             else
             {
@@ -721,6 +763,7 @@ namespace oop_workshop.src.Presentation
 
                 admin.CreateUser(userList, newUser);
                 Console.WriteLine("\nUser created successfully!");
+                SaveAllData();
             }
             catch (Exception ex)
             {
@@ -743,6 +786,7 @@ namespace oop_workshop.src.Presentation
             {
                 admin.DeleteUser(userList, user);
                 Console.WriteLine($"\nUser '{name}' deleted successfully!");
+                SaveAllData();
             }
             else
             {
@@ -790,6 +834,7 @@ namespace oop_workshop.src.Presentation
 
                 admin.UpdateUser(userList, oldUser, newUser);
                 Console.WriteLine("\nUser updated successfully!");
+                SaveAllData();
             }
             catch (Exception ex)
             {

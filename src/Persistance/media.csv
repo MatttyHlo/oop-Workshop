@@ -1,0 +1,12 @@
+MediaType,Title,Rating,RatingCount,Property1,Property2,Property3,Property4,Property5,Property6,Property7
+Movie,The Matrix,,0,Wachowski Brothers,Action|Sci-Fi,1999,English,136,,
+Movie,Inception,,0,Christopher Nolan,Action|Thriller,2010,English,148,,
+Movie,Interstellar,,0,Christopher Nolan,Sci-Fi|Drama,2014,English,169,,
+Song,Bohemian Rhapsody,,0,Freddie Mercury,Queen,Rock,MP3,354,English,
+Song,Imagine,,0,John Lennon,John Lennon,Pop,FLAC,183,English,
+EBook,1984,,0,George Orwell,English,328,1949,978-0451524935,,
+EBook,Clean Code,,0,Robert C. Martin,English,464,2008,978-0132350884,,
+Podcast,Tech Talk Daily,,0,2023,John Doe|Jane Smith,Elon Musk,42,English,,
+VideoGame,The Witcher 3,,0,RPG,CD Projekt Red,2015,PC|PlayStation|Xbox,,,,
+App,Spotify,,0,8.8.0,Spotify AB,iOS|Android|Windows,95.5,,,,
+Image,Sunset Beach,,0,4K,JPG,8.5,2023-06-15,,,,
