@@ -1,32 +1,35 @@
-public class Admin : Employee
+namespace oop_workshop.src.Domain.Users
 {
-    public Admin(string name, int age, int ssn) : base(name, age, ssn)
+    public class Admin : Employee
     {
-    }
-
-    public void ViewUserInfo(List<User> userList)
-    {
-        foreach (var user in userList)
+        public Admin(string name, int age, int ssn) : base(name, age, ssn)
         {
-            Console.WriteLine(user.Name);
-            Console.WriteLine(user.Age);
-            Console.WriteLine(user.SocialSecurityNumber);
         }
-    }
-    public void CreateUser(List<User> userList, User user)
-    {
-        userList.Add(user);
-    }
-    public void DeleteUser(List<User> userList, User user)
-    {
-        userList.Remove(user);
-    }
-    public void UpdateUser(List<User> userList, User oldUser, User newUser)
-    {
-        int index = userList.IndexOf(oldUser);
-        if (index != -1)
+
+        public void ViewUserInfo(List<User> userList)
         {
-            userList[index] = newUser;
+            foreach (var user in userList)
+            {
+                Console.WriteLine(user.Name);
+                Console.WriteLine(user.Age);
+                Console.WriteLine(user.SocialSecurityNumber);
+            }
+        }
+        public void CreateUser(List<User> userList, User user)
+        {
+            userList.Add(user);
+        }
+        public void DeleteUser(List<User> userList, User user)
+        {
+            userList.Remove(user);
+        }
+        public void UpdateUser(List<User> userList, User oldUser, User newUser)
+        {
+            int index = userList.IndexOf(oldUser);
+            if (index != -1)
+            {
+                userList[index] = newUser;
+            }
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using oop_workshop.src.Domain.Media;
 
 public class Employee : User
