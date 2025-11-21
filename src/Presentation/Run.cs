@@ -1,5 +1,6 @@
 using oop_workshop.src.Domain.Media;
 using oop_workshop.src.Domain.Interfaces;
+using oop_workshop.src.Domain.User;
 
 namespace oop_workshop.src.Presentation
 {

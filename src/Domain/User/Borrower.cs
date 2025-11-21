@@ -1,5 +1,7 @@
-namespace oop_workshop.src.Domain.Media
+namespace oop_workshop.src.Domain.User
 {
+    using oop_workshop.src.Domain.Media;
+    
     public class Borrower : User
     {
         public List<Media> borrowed_media {get; private set;}
