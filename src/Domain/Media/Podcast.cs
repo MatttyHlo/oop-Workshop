@@ -27,7 +27,12 @@ namespace oop_workshop.src.Domain.Media
 
         public void Rate(int rating)
         {
-            Console.WriteLine($"Rated podcast episode '{title}' with {rating} stars.");
+            try {
+                AddRating(rating);
+                Console.WriteLine($"Rated podcast episode '{title}' with {rating} stars. Current average: {rating:F1}");
+            } catch (Exception e) {
+                Console.WriteLine("Error adding rating: " + e.Message);
+            }
         }
 
         public void Listen()
@@ -47,7 +52,8 @@ namespace oop_workshop.src.Domain.Media
                    $"  Hosts: {string.Join(", ", Hosts)}\n" +
                    $"  Guests: {string.Join(", ", Guests)}\n" +
                    $"  Episode Number: {EpisodeNumber}\n" +
-                   $"  Language: {Language}";
+                   $"  Language: {Language}\n" +
+                   $"  Rating: {rating:F1}";
         }
     }
 }
