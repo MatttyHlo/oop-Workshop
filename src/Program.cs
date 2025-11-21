@@ -11,6 +11,9 @@ class Program
         Borrower person1 = new Borrower("Jack", 13, 0101010101);
         person1.ListItems(collection, "Movie"); 
         person1.ViewDetails("Harry Potter", collection);
+        person1.Borrow("Harry Potter", collection);
+        person1.Rate(person1.borrowed_media[0], 2);
+        person1.ViewDetails("Harry Potter", person1.borrowed_media);
     
     }
 }

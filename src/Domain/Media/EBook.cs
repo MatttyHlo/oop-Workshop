@@ -27,7 +27,12 @@ namespace oop_workshop.src.Domain.Media
 
         public void Rate(int rating)
         {
-            Console.WriteLine($"Rated e-book '{title}' with {rating} stars.");
+            try {
+                AddRating(rating);
+                Console.WriteLine($"Rated e-book '{title}' with {rating} stars. Current average: {this.rating?.ToString("F1") ?? "N/A"}");
+            } catch (Exception e) {
+                Console.WriteLine("Error adding rating: " + e.Message);
+            }
         }
 
         public void View()
@@ -47,7 +52,8 @@ namespace oop_workshop.src.Domain.Media
                    $"  Language: {Language}\n" +
                    $"  Number of Pages: {NumberOfPages}\n" +
                    $"  Year of Publication: {YearOfPublication}\n" +
-                   $"  ISBN: {ISBN}";
+                   $"  ISBN: {ISBN}\n" +
+                   $"  Rating: {rating:F1}";
         }
     }
 }
