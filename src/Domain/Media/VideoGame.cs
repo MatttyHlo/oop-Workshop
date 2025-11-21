@@ -25,7 +25,12 @@ namespace oop_workshop.src.Domain.Media
 
         public void Rate(int rating)
         {
-            Console.WriteLine($"Rated video game '{title}' with {rating} stars.");
+            try {
+                AddRating(rating);
+                Console.WriteLine($"Rated video game '{title}' with {rating} stars. Current average: {rating:F1}");
+            } catch (Exception e) {
+                Console.WriteLine("Error adding rating: " + e.Message);
+            }
         }
 
         public void Play()
@@ -54,7 +59,8 @@ namespace oop_workshop.src.Domain.Media
                    $"  Genre: {Genre}\n" +
                    $"  Publisher: {Publisher}\n" +
                    $"  Release Year: {ReleaseYear}\n" +
-                   $"  Supported Platforms: {string.Join(", ", SupportedPlatforms)}";
+                   $"  Supported Platforms: {string.Join(", ", SupportedPlatforms)}\n" +
+                   $"  Rating: {rating:F1}";
         }
     }
 }

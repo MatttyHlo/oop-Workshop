@@ -27,7 +27,12 @@ namespace oop_workshop.src.Domain.Media
 
         public void Rate(int rating)
         {
-            Console.WriteLine($"Rated movie '{title}' with {rating} stars.");
+            try {
+                AddRating(rating);
+                Console.WriteLine($"Rated movie '{title}' with {rating} stars. Current average: {rating:F1}");
+            } catch (Exception e) {
+                Console.WriteLine("Error adding rating: " + e.Message);
+            }
         }
 
         public void Watch()
@@ -42,7 +47,8 @@ namespace oop_workshop.src.Domain.Media
                    $"  Genres: {string.Join(", ", Genres)}\n" +
                    $"  Release Year: {ReleaseYear}\n" +
                    $"  Language: {Language}\n" +
-                   $"  Duration: {Duration} minutes";
+                   $"  Duration: {Duration} minutes\n" +
+                   $"  Rating: {rating:F1}";
         }
     }
 }

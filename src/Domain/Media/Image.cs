@@ -25,7 +25,12 @@ namespace oop_workshop.src.Domain.Media
 
         public void Rate(int rating)
         {
-            Console.WriteLine($"Rated image '{title}' with {rating} stars.");
+            try {
+                AddRating(rating);
+                Console.WriteLine($"Rated image '{title}' with {rating} stars. Current average: {rating:F1}");
+            } catch (Exception e) {
+                Console.WriteLine("Error adding rating: " + e.Message);
+            }
         }
 
         public void Display()
@@ -39,7 +44,8 @@ namespace oop_workshop.src.Domain.Media
                    $"  Resolution: {Resolution}\n" +
                    $"  File Format: {FileFormat}\n" +
                    $"  File Size: {FileSize} MB\n" +
-                   $"  Date Taken: {DateTaken:yyyy-MM-dd}";
+                   $"  Date Taken: {DateTaken:yyyy-MM-dd}\n" +
+                   $"  Rating: {rating:F1}";
         }
     }
 }

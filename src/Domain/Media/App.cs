@@ -25,7 +25,15 @@ namespace oop_workshop.src.Domain.Media
 
         public void Rate(int rating)
         {
-            Console.WriteLine($"Rated app '{title}' with {rating} stars.");
+            try
+            {
+                AddRating(rating);
+                Console.WriteLine($"Rated app '{title}' with {rating} stars. Current average: {(this.rating.HasValue ? this.rating.Value.ToString("F1") : "N/A")}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error adding rating: " + e.Message);
+            }
         }
 
         public void Execute()
@@ -39,7 +47,8 @@ namespace oop_workshop.src.Domain.Media
                    $"  Version: {Version}\n" +
                    $"  Publisher: {Publisher}\n" +
                    $"  Supported Platforms: {string.Join(", ", SupportedPlatforms)}\n" +
-                   $"  File Size: {FileSize} MB";
+                   $"  File Size: {FileSize} MB\n" +
+                   $"  Rating: {(this.rating.HasValue ? this.rating.Value.ToString("F1") : "N/A")}";
         }
     }
 }
