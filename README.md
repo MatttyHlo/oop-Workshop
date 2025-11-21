@@ -37,14 +37,23 @@ classDiagram
     %% User Hierarchy
     class Admin {
         +Admin(name: string, age: int, ssn: int)
+        +ViewUserInfo() void
+        +CreateUser() void
+        +DeleteUser() void
+        +UpdateUser() void
     }
     
     class Employee {
         +Employee(name: string, age: int, ssn: int)
+        +AddMedia() void
+        +RemoveMedia() void
     }
     
     class Borrower {
         +Borrower(name: string, age: int, ssn: int)
+        +ListItems() void
+        +ViewDetails() void
+        +Rate() void
     }
     
     %% Media Types
