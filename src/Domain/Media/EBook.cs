@@ -39,5 +39,15 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Reading e-book '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"EBook: {title}\n" +
+                   $"  Author: {Author}\n" +
+                   $"  Language: {Language}\n" +
+                   $"  Number of Pages: {NumberOfPages}\n" +
+                   $"  Year of Publication: {YearOfPublication}\n" +
+                   $"  ISBN: {ISBN}";
+        }
     }
 }

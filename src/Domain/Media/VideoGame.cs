@@ -47,5 +47,14 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Completed video game '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"VideoGame: {title}\n" +
+                   $"  Genre: {Genre}\n" +
+                   $"  Publisher: {Publisher}\n" +
+                   $"  Release Year: {ReleaseYear}\n" +
+                   $"  Supported Platforms: {string.Join(", ", SupportedPlatforms)}";
+        }
     }
 }

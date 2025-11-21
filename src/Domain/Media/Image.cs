@@ -32,5 +32,14 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Displaying image '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"Image: {title}\n" +
+                   $"  Resolution: {Resolution}\n" +
+                   $"  File Format: {FileFormat}\n" +
+                   $"  File Size: {FileSize} MB\n" +
+                   $"  Date Taken: {DateTaken:yyyy-MM-dd}";
+        }
     }
 }

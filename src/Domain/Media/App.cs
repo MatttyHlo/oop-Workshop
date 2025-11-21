@@ -32,5 +32,14 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Executing app '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"App: {title}\n" +
+                   $"  Version: {Version}\n" +
+                   $"  Publisher: {Publisher}\n" +
+                   $"  Supported Platforms: {string.Join(", ", SupportedPlatforms)}\n" +
+                   $"  File Size: {FileSize} MB";
+        }
     }
 }

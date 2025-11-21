@@ -34,5 +34,15 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Watching movie '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"Movie: {title}\n" +
+                   $"  Director: {Director}\n" +
+                   $"  Genres: {string.Join(", ", Genres)}\n" +
+                   $"  Release Year: {ReleaseYear}\n" +
+                   $"  Language: {Language}\n" +
+                   $"  Duration: {Duration} minutes";
+        }
     }
 }

@@ -46,5 +46,16 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Stopped song '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"Song: {title}\n" +
+                   $"  Composer: {Composer}\n" +
+                   $"  Singer: {Singer}\n" +
+                   $"  Genre: {Genre}\n" +
+                   $"  File Type: {FileType}\n" +
+                   $"  Duration: {Duration} seconds\n" +
+                   $"  Language: {Language}";
+        }
     }
 }
