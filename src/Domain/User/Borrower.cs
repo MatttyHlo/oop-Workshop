@@ -12,7 +12,7 @@ public class Borrower : User {
             if (item.GetType().Name == type)
             {
                  try {
-                item.DisplayInfo();
+                item.DisplayInfo();//rework
                 return;
                 } catch (Exception e) {
                     Console.WriteLine("Error displaying item info: " + e.Message);
@@ -28,7 +28,7 @@ public class Borrower : User {
             if (item.title == title)
             {
                 try {
-                item.DisplayInfo();
+                item.DisplayInfo();//rework
                 return;
                 } catch (Exception e) {
                     Console.WriteLine("Error displaying item info: " + e.Message);
@@ -44,7 +44,7 @@ public class Borrower : User {
             return;
         }
         try {
-        item.AddRating(rating);
+        item.AddRating(rating);//rework
         } catch (Exception e) {
             Console.WriteLine("Error adding rating: " + e.Message);
             return;
