@@ -39,5 +39,15 @@ namespace oop_workshop.src.Domain.Media
         {
             Console.WriteLine($"Completed podcast episode '{title}'.");
         }
+
+        public override string ToString()
+        {
+            return $"Podcast: {title}\n" +
+                   $"  Release Year: {ReleaseYear}\n" +
+                   $"  Hosts: {string.Join(", ", Hosts)}\n" +
+                   $"  Guests: {string.Join(", ", Guests)}\n" +
+                   $"  Episode Number: {EpisodeNumber}\n" +
+                   $"  Language: {Language}";
+        }
     }
 }
