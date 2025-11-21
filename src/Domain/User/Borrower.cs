@@ -23,8 +23,8 @@ namespace oop_workshop.src.Domain.Media
                 if (item.title == title)
                 {
                     try {
-                    item.ToString();
-                    return;
+                        Console.WriteLine(item.ToString());
+                        return;
                     } catch (Exception e) {
                         Console.WriteLine("Error displaying item info: " + e.Message);
                     }

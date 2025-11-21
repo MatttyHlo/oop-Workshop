@@ -10,7 +10,7 @@ class Program
         employee1.AddMedia(collection ,new Movie("Harry Potter", "Some Guy", new string[] { "action", "comedy" }, 2001, "English", 120));
         Borrower person1 = new Borrower("Jack", 13, 0101010101);
         person1.ListItems(collection, "Movie"); 
-        Console.WriteLine(employee1);
+        person1.ViewDetails("Harry Potter", collection);
     
     }
 }
