@@ -102,6 +102,104 @@ namespace oop_workshop.src.Domain.User
                 Console.WriteLine("Error adding rating: " + e.Message);
             }
         }
+
+        public void Organize(List<Media> items, string criteria)
+        {
+            if (items == null || items.Count == 0)
+            {
+                Console.WriteLine("No items to organize.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(criteria))
+            {
+                Console.WriteLine("No sorting criteria provided.");
+                return;
+            }
+
+            IComparer<Media>? comparer = null;
+            string sortDescription = criteria;
+            string criteriaLower = criteria.ToLower().Trim();
+            string propertyToCheck = criteria;
+
+            if (criteriaLower == "rating")
+            {
+                comparer = new RatingComparer();
+                sortDescription = "Rating (Highest First)";
+                propertyToCheck = "rating";
+            }
+            else if (criteriaLower == "year" || criteriaLower == "releaseyear" || criteriaLower == "yearofpublication")
+            {
+                comparer = new GenericMediaComparer("ReleaseYear", descending: true);
+                sortDescription = "Year (Most Recent First)";
+                propertyToCheck = "ReleaseYear";
+            }
+            else
+            {
+                comparer = new GenericMediaComparer(criteria, descending: false);
+                sortDescription = $"{criteria} (A-Z / Ascending)";
+                propertyToCheck = criteria;
+            }
+
+            try
+            {
+                List<Media> filteredList = new List<Media>();
+                
+                if (propertyToCheck.ToLower() == "rating")
+                {
+                    foreach (Media item in items)
+                    {
+                        if (item.rating.HasValue)
+                        {
+                            filteredList.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Media item in items)
+                    {
+                        var propertyValue = GetPropertyValue(item, propertyToCheck);
+                        if (propertyValue != null)
+                        {
+                            filteredList.Add(item);
+                        }
+                    }
+                }
+
+                if (filteredList.Count == 0)
+                {
+                    Console.WriteLine($"\nNo items found with property '{propertyToCheck}'.");
+                    return;
+                }
+
+                filteredList.Sort(comparer);
+
+                Console.WriteLine($"\n--- Media List Organized by {sortDescription} ---");
+                foreach (Media item in filteredList)
+                {
+                    string ratingStr = item.rating.HasValue ? $"{item.rating.Value:F1}" : "N/A";
+                    Console.WriteLine($"[{item.GetType().Name}] {item.title} (Rating: {ratingStr})");
+                }
+                Console.WriteLine($"--- Total: {filteredList.Count} items ---\n");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error organizing media list: {e.Message}");
+            }
+        }
+
+        private object? GetPropertyValue(Media media, string propertyName)
+        {
+            Type type = media.GetType();
+            var property = type.GetProperty(propertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase);
+            
+            if (property != null)
+            {
+                return property.GetValue(media);
+            }
+
+            return null;
+        }
     }
-    
 }
