@@ -1,5 +1,3 @@
-using System;
-
 namespace oop_workshop.src.Domain.Media
 {
     public class Media

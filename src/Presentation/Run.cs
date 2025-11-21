@@ -11,7 +11,6 @@ namespace oop_workshop.src.Presentation
 
         public static void Initialize()
         {
-            // Initialize sample media
             mediaCollection.Add(new Movie("The Matrix", "Wachowski Brothers", new string[] { "Action", "Sci-Fi" }, 1999, "English", 136));
             mediaCollection.Add(new Movie("Inception", "Christopher Nolan", new string[] { "Action", "Thriller" }, 2010, "English", 148));
             mediaCollection.Add(new Movie("Interstellar", "Christopher Nolan", new string[] { "Sci-Fi", "Drama" }, 2014, "English", 169));
@@ -30,7 +29,6 @@ namespace oop_workshop.src.Presentation
             
             mediaCollection.Add(new Image("Sunset Beach", "4K", "JPG", 8.5, new DateTime(2023, 6, 15)));
 
-            // Initialize sample users
             userList.Add(new Borrower("Alice Johnson", 25, 123456789));
             userList.Add(new Borrower("Bob Smith", 30, 987654321));
             userList.Add(new Employee("Charlie Brown", 35, 111222333));
@@ -81,9 +79,10 @@ namespace oop_workshop.src.Presentation
                 Console.WriteLine("[3] Borrow an item");
                 Console.WriteLine("[4] View borrowed items");
                 Console.WriteLine("[5] Rate an item");
-                Console.WriteLine("[6] Perform media action");
-                Console.WriteLine("[7] Logout/Switch Role");
-                Console.WriteLine("[8] Exit Program");
+                Console.WriteLine("[6] Organize/Sort items");
+                Console.WriteLine("[7] Perform media action");
+                Console.WriteLine("[8] Logout/Switch Role");
+                Console.WriteLine("[9] Exit Program");
                 Console.Write("\nChoice: ");
 
                 string choice = Console.ReadLine() ?? "";
@@ -106,12 +105,15 @@ namespace oop_workshop.src.Presentation
                         RateItem(borrower);
                         break;
                     case "6":
-                        PerformMediaAction();
+                        OrganizeItems(borrower);
                         break;
                     case "7":
+                        PerformMediaAction();
+                        break;
+                    case "8":
                         Start();
                         return;
-                    case "8":
+                    case "9":
                         Environment.Exit(0);
                         return;
                     default:
@@ -267,7 +269,7 @@ namespace oop_workshop.src.Presentation
             }
         }
 
-        // === BORROWER METHODS ===
+        //BORROWER METHODS
 
         private static void ListItemsByType(Borrower borrower)
         {
@@ -368,6 +370,47 @@ namespace oop_workshop.src.Presentation
                 }
             }
 
+            PauseScreen();
+        }
+
+        private static void OrganizeItems(Borrower borrower)
+        {
+            Console.Clear();
+            Console.WriteLine("=== ORGANIZE/SORT ITEMS ===");
+            Console.WriteLine();
+            Console.WriteLine("Sort by:");
+            Console.WriteLine("[1] Rating (highest first)");
+            Console.WriteLine("[2] Year/Release Year (most recent first)");
+            Console.WriteLine("[3] Title (A-Z)");
+            Console.WriteLine("[4] Custom criteria");
+            Console.Write("\nChoice: ");
+
+            string choice = Console.ReadLine() ?? "";
+            string criteria = "";
+
+            switch (choice)
+            {
+                case "1":
+                    criteria = "rating";
+                    break;
+                case "2":
+                    criteria = "year";
+                    break;
+                case "3":
+                    criteria = "title";
+                    break;
+                case "4":
+                    Console.Write("Enter property name to sort by (e.g., Director, Genre, Language): ");
+                    criteria = Console.ReadLine() ?? "";
+                    break;
+                default:
+                    Console.WriteLine("Invalid option.");
+                    PauseScreen();
+                    return;
+            }
+
+            Console.WriteLine();
+            borrower.Organize(mediaCollection, criteria);
             PauseScreen();
         }
 
@@ -491,7 +534,7 @@ namespace oop_workshop.src.Presentation
             PauseScreen();
         }
 
-        // === EMPLOYEE METHODS ===
+        //EMPLOYEE METHODS
 
         private static void AddMediaItem(Employee employee)
         {
@@ -689,7 +732,7 @@ namespace oop_workshop.src.Presentation
             PauseScreen();
         }
 
-        // === ADMIN USER MANAGEMENT METHODS ===
+        //ADMIN USER MANAGEMENT METHODS
 
         private static void CreateUser(Admin admin)
         {
@@ -799,7 +842,7 @@ namespace oop_workshop.src.Presentation
             PauseScreen();
         }
 
-        // === HELPER METHODS ===
+        //HELPER METHODS
 
         private static void PauseScreen()
         {
