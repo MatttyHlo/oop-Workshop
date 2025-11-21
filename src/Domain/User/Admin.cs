@@ -1,4 +1,4 @@
-namespace oop_workshop.src.Domain.Users
+namespace oop_workshop.src.Domain.User
 {
     public class Admin : Employee
     {

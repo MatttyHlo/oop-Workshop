@@ -1,13 +1,16 @@
-public abstract class User
+namespace oop_workshop.src.Domain.User
 {
-    public string Name { get; }
-    public int Age { get; set; }
-    public int SocialSecurityNumber { get; set; }
-
-    public User(string name, int age, int ssn)
+    public abstract class User
     {
-        Name = name;
-        Age = age;
-        SocialSecurityNumber = ssn;
+        public string Name { get; }
+        public int Age { get; set; }
+        public int SocialSecurityNumber { get; set; }
+
+        public User(string name, int age, int ssn)
+        {
+            Name = name;
+            Age = age;
+            SocialSecurityNumber = ssn;
+        }
     }
 }
