@@ -68,8 +68,6 @@ namespace oop_workshop.src.Domain.Media
 
             try
             {
-                // remove from available collection and add to borrower's list
-                items.Remove(found);
                 borrowed_media.Add(found);
                 Console.WriteLine($"Borrowed '{title}'.");
             }
